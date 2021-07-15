@@ -100,7 +100,6 @@ function BuildHTML(result, file) {
 	result.writeHTML(OutputDir + file);
 	
 	console.log('Built HTML file: ' + file);
-	console.log();
 }
 
 // BuildPDF outputs the PDF file after building it via a chromium package
@@ -138,6 +137,8 @@ fs.readdir(InputDir, async function(err, files) {
 	if(files.length === 0) throw 'No markdown files found! Exiting.';
 	
 	console.log('Markdown files found: ' + files.join(', '));
+	console.log();
+	console.log();
 	
 	// Loop through each file converting it
 	for(let file of files) {
