@@ -4,9 +4,9 @@
 	"description": "Creates PDF and HTML files from Markdown using the GitHub (or custom) theme.",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/twohorus/markdown-to-pdf.git"
+		"url": "git://github.com/JohnMeyerhoff/markdown-to-pdf.git"
 	},
-	"main": "src/markdown-to-pdf.js",
+	"main": "src/docker_entry.js",
 	"scripts": {
 		"test": "test/test.js"
 	},
