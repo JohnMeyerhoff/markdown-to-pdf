@@ -1,6 +1,6 @@
 FROM node:12
 
-ARG DIR=/markdown-to-df
+ARG DIR=/markdown-to-df/
 
 RUN apt-get update && \
     apt-get -y install xvfb gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 \
