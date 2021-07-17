@@ -13,14 +13,18 @@ RUN apt-get update && \
 RUN mkdir $DIR && \
     chmod 777 $DIR
 
-COPY src/*.js $DIR
-COPY package.json $DIR
-COPY template/ $DIR/template/
-COPY styles/ $DIR/styles/
+WORKDIR $DIR
+
+COPY src/*.js ./
+COPY package.json ./
+COPY template/ template/
+COPY styles/ styles/
 
 RUN npm install
 RUN fc-cache -fv && \
-    chmod +x $DIR/docker_entry.js && \
-    ln -s $DIR/docker_entry.js /usr/local/bin/markdown-to-pdf
+    chmod +x docker_entry.js && \
+    ln -s docker_entry.js /usr/local/bin/markdown-to-pdf
+
+WORKDIR /
 
 CMD [ "markdown-to-pdf" ]
