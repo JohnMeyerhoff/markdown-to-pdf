@@ -49,7 +49,7 @@ function execute(env_prefix = '', root_dir = '/') {
 	const build_html = getEnv('build_html', true, booleanTransformer);
 	
 	// Custom CSS and HTML files for theming
-	const ThemeFile = getEnv('theme', null, pathTransformer);
+	const ThemeFile = getEnv('theme', DEFAULT_THEME_FILE, pathTransformer);
 	const HighlightThemeFile = getEnv('highlight_theme', DEFAULT_HIGHLIGHT_FILE, pathTransformer);
 	const TemplateFile = getEnv('template', DEFAULT_TEMPLATE_FILE, pathTransformer);
 	
@@ -115,7 +115,7 @@ function execute(env_prefix = '', root_dir = '/') {
 	
 	// Assign the style and template files to strings for later manipulation
 	const style = (extend_default_theme ? md2pdf.getFileContent(DEFAULT_THEME_FILE) : '')
-		+ (ThemeFile === null ? '' : md2pdf.getFileContent(ThemeFile))
+		+ md2pdf.getFileContent(ThemeFile)
 		+ md2pdf.getFileContent(HighlightThemeFile);
 	const template = md2pdf.getFileContent(TemplateFile);
 	
