@@ -15,15 +15,15 @@ RUN mkdir $DIR && \
 
 WORKDIR $DIR
 
-COPY src/*.js ./
+COPY src/*.js src/
 COPY package.json ./
 COPY template/ template/
 COPY styles/ styles/
 
 RUN npm install
 RUN fc-cache -fv && \
-    chmod +x docker_entry.js && \
-    ln -s docker_entry.js /usr/local/bin/markdown-to-pdf
+    chmod +x src/docker_entry.js && \
+    ln -s src/docker_entry.js /usr/local/bin/markdown-to-pdf
 
 WORKDIR /
 
