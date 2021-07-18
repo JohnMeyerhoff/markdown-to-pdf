@@ -11,6 +11,35 @@ const DEFAULT_HIGHLIGHT_FILE = '/markdown-to-pdf/styles/highlight.css';
 const DEFAULT_TEMPLATE_FILE = '/markdown-to-pdf/template/template.html';
 
 
+// CreateOutputDirectory creates the output directory if it doesn't exist
+function CreateOutputDirectory(dirname) {
+	if(!fs.existsSync(dirname)) {
+		fs.mkdirSync(dirname);
+	}
+}
+
+// GetMarkdownFiles returns an array of only files ending in .md or .markdown
+// NOTE: When a file name is the same, eg. happy.md and happy.markdown, only one file is
+// outputted as it will be overwritten. This needs to be checked. (TODO:)
+function GetMarkdownFiles(files) {
+	return files.filter(function(filePath) {
+		if(path.extname(filePath).match(/^(.md|.markdown)$/)) {
+			return true;
+		}
+	});
+}
+
+// UpdateFileName is a helper function to replace the extension
+function UpdateFileName(fileName, extension) {
+	fileName = fileName.split('.');
+	fileName.pop();
+	
+	if(extension !== null) fileName.push(extension);
+	
+	return fileName.join('.');
+}
+
+
 function execute(env_prefix = '', root_dir = '/') {
 	function getEnv(name, def, transformer = val => val) {
 		let value = process.env[env_prefix + name.toUpperCase()];
@@ -60,37 +89,9 @@ function execute(env_prefix = '', root_dir = '/') {
 	const table_of_contents = getEnv('table_of_contents', false, booleanTransformer);
 	
 	
-	// CreateOutputDirectory creates the output directory if it doesn't exist
-	function CreateOutputDirectory(dirname) {
-		if(!fs.existsSync(dirname)) {
-			fs.mkdirSync(dirname);
-		}
-	}
-	
-	// GetMarkdownFiles returns an array of only files ending in .md or .markdown
-	// NOTE: When a file name is the same, eg. happy.md and happy.markdown, only one file is
-	// outputted as it will be overwritten. This needs to be checked. (TODO:)
-	function GetMarkdownFiles(files) {
-		return files.filter(function(filePath) {
-			if(path.extname(filePath).match(/^(.md|.markdown)$/)) {
-				return true;
-			}
-		});
-	}
-	
 	// GetFileBody retrieves the file content as a string
 	function GetFileBody(file) {
 		return md2pdf.getFileContent(InputDir + file);
-	}
-	
-	// UpdateFileName is a helper function to replace the extension
-	function UpdateFileName(fileName, extension) {
-		fileName = fileName.split('.');
-		fileName.pop();
-		
-		if(extension !== null) fileName.push(extension);
-		
-		return fileName.join('.');
 	}
 	
 	// BuildHTML outputs the HTML string to a file
@@ -112,6 +113,27 @@ function execute(env_prefix = '', root_dir = '/') {
 		console.log();
 	}
 	
+	
+	console.log('Detected settings:');
+	console.table({
+		input_dir: InputDir,
+		image_import: ImageImport,
+		image_dir: ImageDir,
+		
+		output_dir: OutputDir,
+		
+		build_html: build_html,
+		
+		theme: ThemeFile,
+		highlight_theme: HighlightThemeFile,
+		template: TemplateFile,
+		
+		extend_default_theme: extend_default_theme,
+		
+		table_of_contents: table_of_contents,
+	});
+	console.log();
+	console.log();
 	
 	// Assign the style and template files to strings for later manipulation
 	const style = (extend_default_theme ? md2pdf.getFileContent(DEFAULT_THEME_FILE) : '')
