@@ -11,6 +11,7 @@ COPY src/*.js ./
 COPY package.json ./
 COPY template/ template/
 COPY styles/ styles/
+COPY /node_modules ./
 
 RUN npm install
 RUN fc-cache -fv && \
