@@ -109,7 +109,7 @@ function execute(env_prefix = '', root_dir = '/') {
 		
 		result.writePDF(OutputDir + file);
 		
-		console.log('Build PDF file: ' + file);
+		console.log('Built PDF file: ' + file);
 		console.log();
 	}
 	
