@@ -1,4 +1,7 @@
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
 
 name: CI
 
@@ -13,7 +16,6 @@ jobs:
         export TAG=${GITHUB_SHA:0:8}
         echo "$DOCKER_PASSWORD" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
         docker-compose -f docker-compose.yaml build
-      if: github.ref == 'refs/heads/master' || contains(github.ref,'bdc_')
       env:
         DOCKER_USERNAME: ${{ github.repository }}
         DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +24,6 @@ jobs:
         export TAG=${GITHUB_SHA:0:8}
         echo "$DOCKER_PASSWORD" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
         docker-compose -f docker-compose.yaml push
-      if: github.ref == 'refs/heads/master' || contains(github.ref,'bdc_')
       env:
         DOCKER_USERNAME: ${{ github.repository }}
         DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -31,7 +32,6 @@ jobs:
       run: |
         echo "$DOCKER_PASSWORD" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
         docker-compose -f docker-compose.yaml build
-      if: github.ref == 'refs/heads/master'
       env:
         DOCKER_USERNAME: ${{ github.repository }}
         DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +40,6 @@ jobs:
       run: |
         echo "$DOCKER_PASSWORD" | docker login docker.pkg.github.com -u "$DOCKER_USERNAME" --password-stdin
         docker-compose -f docker-compose.yaml push
-      if: github.ref == 'refs/heads/master'
       env:
         DOCKER_USERNAME: ${{ github.repository }}
         DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +47,6 @@ jobs:
       run: |		
         echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin		
         docker-compose -f docker-compose-dockerhub.yaml build		
-      if: github.ref == 'refs/heads/master'		
       env:		
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}		
         DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}		
@@ -56,7 +54,7 @@ jobs:
       run: |		
         echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin		
         docker-compose -f docker-compose-dockerhub.yaml push		
-      if: github.ref == 'refs/heads/master'		
       env:		
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}		
         DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
