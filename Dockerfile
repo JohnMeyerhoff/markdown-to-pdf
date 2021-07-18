@@ -15,7 +15,7 @@ RUN npm i puppeteer \
     && mkdir -p /home/pptruser/Downloads \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /node_modules
-USER pptruser
+    
 ARG DIR=/markdown-to-pdf/
 
 RUN mkdir $DIR && \
