@@ -30,6 +30,9 @@ inputs:
   highlight_theme:
     description: '(File) The location of the CSS file you want to use as the code snipped highlight theme'
     required: false
+  extend_highlight_theme:
+    description: '(Boolean) Whether to extend your custom CSS file with the default highlight theme'
+    required: false
   template:
     description: '(File) The location of the HTML/Mustache file you want to use as the HTML template'
     required: false

@@ -84,6 +84,8 @@ function execute(env_prefix = '', root_dir = '/') {
 	
 	// Whether to extend your custom CSS file with the default theme
 	const extend_default_theme = getEnv('extend_default_theme', false, booleanTransformer);
+	// Whether to extend your custom CSS file with the default highlight theme
+	const extend_highlight_theme = getEnv('extend_highlight_theme', false, booleanTransformer);
 	
 	// Table Of Contents settings
 	const table_of_contents = getEnv('table_of_contents', false, booleanTransformer);
@@ -129,6 +131,7 @@ function execute(env_prefix = '', root_dir = '/') {
 		template: TemplateFile,
 		
 		extend_default_theme: extend_default_theme,
+		extend_highlight_theme: extend_highlight_theme,
 		
 		table_of_contents: table_of_contents,
 	});
@@ -138,6 +141,7 @@ function execute(env_prefix = '', root_dir = '/') {
 	// Assign the style and template files to strings for later manipulation
 	const style = (extend_default_theme ? md2pdf.getFileContent(DEFAULT_THEME_FILE) : '')
 		+ md2pdf.getFileContent(ThemeFile)
+		+ (extend_highlight_theme ? md2pdf.getFileContent(DEFAULT_HIGHLIGHT_FILE) : '')
 		+ md2pdf.getFileContent(HighlightThemeFile);
 	const template = md2pdf.getFileContent(TemplateFile);
 	

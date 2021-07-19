@@ -95,6 +95,15 @@ with:
 ([File](#file))
 The location of the CSS file you want to use as the code snipped highlight theme.
 
+
+```yaml
+with:
+  extend_highlight_theme: value
+```
+
+([Boolean](#boolean))
+Whether to extend your custom CSS file with the default highlight theme.
+
 ### HTML/Mustache Template file
 
 ```yaml
