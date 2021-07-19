@@ -2,6 +2,7 @@ FROM johnmeyerhoff/node_quickstart:latest
 
 ARG DIR=/markdown-to-pdf/
 
+
 RUN mkdir $DIR && \
     chmod 777 $DIR
 
