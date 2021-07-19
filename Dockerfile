@@ -1,4 +1,6 @@
 FROM johnmeyerhoff/node_quickstart:latest
+
+COPY /node_modules ./markdown-to-pdf/node_modules/
 ARG DIR=/markdown-to-pdf/
 RUN mkdir $DIR && \
     chmod 777 $DIR
@@ -7,7 +9,6 @@ COPY src/*.js ./
 COPY package.json ./
 COPY template/ template/
 COPY styles/ styles/
-COPY /node_modules ./
 RUN npm install
 RUN fc-cache -fv && \
     chmod +x docker_entry.js && \
