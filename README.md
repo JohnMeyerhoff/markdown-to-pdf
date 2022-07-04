@@ -55,7 +55,7 @@ with:
 ([String](#string))
 The path you use to import your images that can be replaced with the server URL. For example if you
 had `<img src="./images/something-else/file.png">` or `![](./images/something-else/file.png)` you would pass `./images`
-as this is replaced by `https://localhost:3000` during the build process.
+as this is replaced by `https://localhost:3000/` during the build process.
 
 ### Build HTML
 
