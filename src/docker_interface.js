@@ -159,7 +159,7 @@ function execute(env_prefix = '', root_dir = '/') {
 		// Check output folder exists and fetch file array
 		CreateOutputDirectory(OutputDir);
 		
-		files = GetMarkdownFiles(files);
+		files = GetMarkdownFiles(md2pdf.nullCoalescing(files, []));
 		if(files.length === 0) throw 'No markdown files found! Exiting.';
 		
 		console.log('Markdown files found: ' + files.join(', '));
