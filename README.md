@@ -168,7 +168,7 @@ jobs:
     name: Build PDF
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: docs
